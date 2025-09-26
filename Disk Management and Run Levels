@@ -1,0 +1,71 @@
+1 Disk Partitioning
+Check Disk Usage
+df -h        # Disk usage in human-readable format
+lsblk        # List block devices
+fdisk -l     # List partition tables
+
+Partition Disks (Standard Partition)
+sudo fdisk /dev/sdb
+# Follow prompts: n (new), p (primary), w (write)
+
+2 Storage
+
+Linux identifies disks as /dev/sda, /dev/sdb, etc.
+Partitions: /dev/sda1, /dev/sdb1, etc.
+Mounting partitions:
+mount /dev/sdb1 /mnt
+umount /mnt
+
+3 Logical Volume Management (LVM)
+
+LVM allows flexible disk management (resize volumes, combine disks).
+
+Basic LVM Concepts
+Physical Volume (PV) – Actual disk or partition.
+Volume Group (VG) – Pool of storage from one or more PVs.
+Logical Volume (LV) – Partition created from VG, mounted like a normal filesystem.
+
+4 LVM Configuration During Installation
+
+Select LVM option in installer.
+
+Create VG from available PVs.
+
+Allocate LV for /, /home, swap, etc.
+
+5 Add Disk and Create Standard Partition
+sudo fdisk /dev/sdc    # Create standard partition
+mkfs.ext4 /dev/sdc1    # Format partition
+mount /dev/sdc1 /mnt   # Mount
+
+6 Add Disk and Create LVM Partition
+# Create physical volume
+sudo pvcreate /dev/sdd
+
+# Create volume group
+sudo vgcreate vg_data /dev/sdd
+
+# Create logical volume
+sudo lvcreate -n lv_data -L 10G vg_data
+
+# Format and mount
+mkfs.ext4 /dev/vg_data/lv_data
+mount /dev/vg_data/lv_data /mnt/data
+
+7 Extend Disk Using LVM
+# Extend logical volume
+lvextend -L +5G /dev/vg_data/lv_data
+
+# Resize filesystem
+resize2fs /dev/vg_data/lv_data
+
+8 Adding Swap Space
+
+Create swap file:
+
+fallocate -l 2G /swapfile
+chmod 600 /swapfile
+mkswap /swapfile
+swapon /swapfile
+
+echo "/swapfile swap swap defaults 0 0" | sudo tee -a /etc/fstab
