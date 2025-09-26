@@ -1,0 +1,137 @@
+✅ This module covers file editing, user management, system monitoring, process management, and maintenance—all essential 
+for Linux system administrators.
+
+
+1. Linux File Editors
+
+vi text editor: Powerful command-line editor.
+vi filename
+
+Modes: i for insert, Esc for command mode, :wq to save and exit.
+
+nano: Easier editor for beginners.
+nano filename
+
+2. sed Command
+
+Stream editor for text manipulation.
+
+# Replace text
+sed 's/old/new/' file.txt
+
+# Delete lines containing "error"
+sed '/error/d' file.txt
+
+3. User Account Management
+
+Add new user:
+sudo useradd username
+sudo passwd username
+
+Delete user:
+sudo userdel username
+
+View user details:
+id username
+
+4. Switch Users and Sudo Access
+su - username    # Switch user
+sudo command     # Execute as root
+sudo su -        # Switch to root
+
+5. Monitor Users
+who              # Logged in users
+w                # Active users with processes
+users            # Just usernames
+
+6. Communicate with Users
+write username           # Send message to user
+wall "System maintenance tonight"  # Broadcast to all users
+
+7. Linux Directory Service & Authentication
+
+Linux uses local files (/etc/passwd, /etc/shadow) for authentication.
+Enterprise options:
+Active Directory (AD) – Windows-based centralized authentication.
+LDAP / OpenLDAP – Lightweight Directory Access Protocol for Linux/Unix.
+IDM / FreeIPA – Identity management on Linux.
+WinBIND – Linux integration with AD.
+
+8. System Utility Commands
+date        # Current date and time
+uptime      # System uptime
+hostname    # Show hostname
+which cmd   # Location of command
+cal         # Calendar
+bc          # Calculator
+
+9. Processes and Scheduling
+
+View processes:
+ps aux       # Show all processes
+top          # Interactive process monitor
+htop         # Advanced top (if installed)
+
+Kill processes:
+kill PID
+kill -9 PID  # Force kill
+
+Manage services:
+systemctl start/stop/restart service
+systemctl status service
+
+Scheduling tasks:
+crontab -e   # Edit cron jobs
+at 10:00     # Schedule one-time job
+
+10. Process Management
+
+Check running processes: ps, top
+Prioritize process: nice, renice
+Stop/kill process: kill, killall
+
+11. System Monitoring Commands
+top             # Real-time process monitoring
+df -h           # Disk usage
+dmesg           # Kernel logs
+iostat 1        # CPU & I/O stats
+netstat -tulnp  # Network connections
+free -h         # Memory usage
+
+12. OS Maintenance Commands
+shutdown -h now       # Power off
+reboot               # Restart system
+halt                 # Stop all processes
+init 0               # Change runlevel to shutdown
+
+13. Changing System Hostname
+hostnamectl set-hostname newname
+hostname             # Verify
+
+14. Finding System Information
+uname -a                 # Kernel & OS info
+cat /etc/redhat-release  # RHEL version
+cat /etc/*rel*           # Release info
+dmidecode                # Hardware info
+arch                     # System architecture
+
+15. Terminal Control Keys
+
+Ctrl + C → Kill running command
+Ctrl + Z → Suspend command
+Ctrl + D → Logout / EOF
+Ctrl + L → Clear screen
+
+16. Terminal Commands
+clear          # Clear terminal
+exit           # Logout
+script logfile # Record terminal session
+
+17. Recover Root Password (Single User Mode)
+Reboot system.
+Enter GRUB menu, edit boot parameters.
+Add single or init=/bin/bash to kernel line.
+Reset root password:
+passwd
+Reboot normally.
+
