@@ -1,0 +1,105 @@
+ls *.txt       # All files ending with .txt
+ls file?       # Files with name 'file' and any single character after
+ls file[1-3]   # file1, file2, file3
+
+Linux files have read (r), write (w), execute (x) permissions for user, group, others.
+
+Check permissions:
+ls -l file.txt
+
+1 Change permissions:
+
+# Symbolic method
+chmod u+x file.txt       # Add execute to user
+chmod g-w file.txt       # Remove write from group
+chmod o+r file.txt       # Add read for others
+
+# Numeric method
+chmod 755 file.txt       # rwx for user, r-x for group/others
+chmod 644 file.txt       # rw- for user, r-- for group/others
+
+2 File Ownership (chown, chgrp)
+Change file owner:
+
+sudo chown newuser file.txt
+
+Change group:
+sudo chgrp newgroup file.txt
+
+Change both owner and group:
+sudo chown newuser:newgroup file.txt
+
+3 Getting Help
+man command        # Detailed manual
+whatis command     # Short description
+info command       # More detailed than whatis
+command --help     # Quick help
+
+4 TAB Completion & Up Arrow Keys
+
+TAB → Auto-completes commands or filenames.
+cd Doc<TAB>   # Completes to Documents/
+
+5 Adding Text to Files
+# Using echo
+echo "Hello World" > file.txt      # Overwrite
+echo "Another line" >> file.txt   # Append
+
+# Using text editors
+vi file.txt
+nano file.txt
+6 Pipes (|)
+
+Pipe sends the output of one command as input to another.
+
+cat file.txt | grep "error"
+ls -l | sort -k5
+
+7 File Maintenance Commands
+touch file.txt       # Create empty file
+rm file.txt          # Remove file
+mkdir dir_name       # Create directory
+rmdir dir_name       # Remove empty directory
+
+8 File Display Commands
+cat file.txt         # Display file content
+tac file.txt         # Display in reverse
+head -n 10 file.txt  # First 10 lines
+tail -n 10 file.txt  # Last 10 lines
+less file.txt        # Scrollable view
+more file.txt        # Paginated view
+
+
+9 Compare Files
+diff file1.txt file2.txt   # Shows differences
+cmp file1.txt file2.txt    # Compares byte by byte
+
+10 Compress and Uncompress Files
+# Create tar archive
+tar -cvf archive.tar file1 file2
+
+# Extract tar archive
+tar -xvf archive.tar
+
+# Compress with gzip
+gzip file.txt           # file.txt -> file.txt.gz
+
+# Decompress gzip
+gunzip file.txt.gz
+
+# Tar + gzip
+tar -czvf archive.tar.gz folder/
+tar -xzvf archive.tar.gz
+
+11 Combining and Splitting Files
+# Combine files
+cat file1.txt file2.txt > combined.txt
+
+# Split files into chunks
+split -l 1000 largefile.txt part_   # 1000 lines per file
+split -b 1M largefile.bin chunk_    # 1MB per file
+
+
+💡 Tip: Use pipes and filters together for powerful command-line processing, e.g.,
+
+cat /var/log/syslog | grep "error" | sort | uniq -c | sort -nr
