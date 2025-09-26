@@ -1,0 +1,18 @@
+1. Hard Link
+A hard link is like another name for an existing file. Both the original file and the hard link point to the same inode (the actual data on disk).
+Key Points:
+•	Cannot link directories (only files).
+•	Cannot link files across different file systems.
+•	Deleting the original file does not delete the content if a hard link exists.
+•	Both files share the same inode number.
+# Hard link
+ln file.txt hardlink.txt
+
+2. Soft Link (Symbolic Link)
+A soft link (or symlink) is like a shortcut to another file or directory. It points to the file name, not the inode.
+Key Points:
+•	Can link files and directories.
+•	Can link across different file systems.
+•	Deleting the original file breaks the link (it becomes a dangling link).
+# Soft link (symbolic)
+ln -s file.txt symlink.txt
