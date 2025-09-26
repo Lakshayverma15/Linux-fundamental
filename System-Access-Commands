@@ -1,0 +1,24 @@
+ssh username@IP_address     # SSH login to a remote Linux system
+
+passwd    #Change Password
+sudo passwd username
+
+# Switch to another user
+su - username
+
+# Switch to root (superuser)
+sudo su -
+
+who   # shows logged-in users.
+w     #shows active processes for users.
+users  #shows logged-in usernames.
+
+
+#Communicate with Other Users
+write username
+wall "message to all users"
+
+
+
+
+
