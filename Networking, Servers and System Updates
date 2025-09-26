@@ -1,0 +1,143 @@
+1. Networking Scripts / Commands
+enable_internet.sh
+#!/bin/bash
+# Enable internet in Linux VM (example for DHCP)
+sudo dhclient
+ping -c 4 google.com
+
+network_commands.sh
+#!/bin/bash
+# Common network commands
+
+echo "IP Address:"
+ifconfig -a
+
+echo "Routing Table:"
+netstat -rn
+
+echo "Listening Ports:"
+netstat -tulnp
+
+echo "Capture Packets (tcpdump, press Ctrl+C to stop):"
+sudo tcpdump -i eth0
+
+nic_info.sh
+#!/bin/bash
+# NIC Information using ethtool
+sudo ethtool eth0
+
+nic_bonding.sh
+#!/bin/bash
+# Example NIC bonding config
+# Create bond0 with mode 1 (active-backup)
+sudo modprobe bonding
+sudo ip link add bond0 type bond mode active-backup
+sudo ip link set eth0 master bond0
+sudo ip link set eth1 master bond0
+sudo ip link set bond0 up
+
+file_download.sh
+#!/bin/bash
+# Download files using wget or curl
+wget https://example.com/file.txt
+curl -O https://example.com/file.txt
+
+file_transfer.sh
+#!/bin/bash
+# Transfer files using scp
+scp file.txt user@remote_host:/home/user/
+
+dns_lookup.sh
+#!/bin/bash
+# DNS and IP lookup
+nslookup google.com
+dig google.com
+
+ntp_chronyd.sh
+#!/bin/bash
+# Sync time using NTP / chronyd
+sudo systemctl start chronyd
+sudo chronyc tracking
+
+2. System Updates Scripts
+rpm_yum.sh
+#!/bin/bash
+# Install/remove packages using RPM/YUM
+sudo yum install vim -y
+sudo yum remove nano -y
+sudo rpm -qa | grep vim
+
+system_upgrade.sh
+#!/bin/bash
+# Upgrade Linux system
+sudo yum update -y
+sudo yum upgrade -y
+
+local_repo.sh
+#!/bin/bash
+# Create local repo from ISO/CD/DVD
+sudo mount /dev/cdrom /mnt
+sudo cp -r /mnt /localrepo
+sudo createrepo /localrepo
+
+advanced_package_mgmt.sh
+#!/bin/bash
+# Enable repository and install package
+sudo yum-config-manager --add-repo http://mirror.centos.org/centos/7/os/x86_64/
+sudo yum install htop -y
+
+3. Servers Scripts
+sendmail.sh
+#!/bin/bash
+# Install and start sendmail
+sudo yum install sendmail sendmail-cf -y
+sudo systemctl start sendmail
+sudo systemctl enable sendmail
+
+apache_webserver.sh
+#!/bin/bash
+# Install and start Apache web server
+sudo yum install httpd -y
+sudo systemctl start httpd
+sudo systemctl enable httpd
+
+central_logger.sh
+#!/bin/bash
+# Setup central logging using rsyslog
+sudo yum install rsyslog -y
+sudo systemctl start rsyslog
+sudo systemctl enable rsyslog
+
+4. Security Script
+os_hardening.sh
+#!/bin/bash
+# Basic Linux hardening steps
+sudo passwd -l root
+sudo yum install fail2ban -y
+sudo systemctl enable firewalld
+sudo systemctl start firewalld
+sudo setenforce 1
+
+5. LDAP Script
+openldap_install.sh
+#!/bin/bash
+# Install and configure OpenLDAP
+sudo yum install openldap-servers openldap-clients -y
+sudo systemctl start slapd
+sudo systemctl enable slapd
+
+✅ Next Steps
+
+Make all scripts executable:
+
+chmod +x networking/*.sh system_updates/*.sh servers/*.sh security/*.sh ldap/*.sh
+
+
+Push the folder structure to GitHub:
+
+git init
+git add .
+git commit -m "Initial commit: Linux Networking, Servers, System Update commands"
+git branch -M main
+git remote add origin https://github.com/yourusername/Linux-Networking-Servers.git
+git push -u origin main
