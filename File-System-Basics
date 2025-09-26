@@ -1,0 +1,27 @@
+pwd       # Print current directory
+cd /path/to/directory   # Change directory
+cd ~      # Go to home directory
+cd ..     # Go to parent directory
+
+Listing Files
+ls             # List files in current directory
+ls -l          # Detailed list (permissions, owner, size, date)
+ls -a          # Show hidden files
+ls -lh         # Human-readable sizes
+
+File & Directory Management
+mkdir new_folder            # Create directory
+touch file.txt              # Create empty file
+rm file.txt                 # Delete file
+rm -r folder_name           # Delete directory recursively
+cp source.txt dest.txt      # Copy file
+mv oldname.txt newname.txt  # Rename or move file
+
+
+File Viewing & Combining
+cat file.txt           # Display file content
+tac file.txt           # Display file in reverse
+head -n 5 file.txt     # First 5 lines
+tail -n 5 file.txt     # Last 5 lines
+cut -d':' -f1 /etc/passwd   # Extract first field from colon-separated file
+
